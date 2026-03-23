@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryan Contey | Investment Analytics & Data Engineering</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #2b6cb0;
+            --light: #ebf4ff;
+            --text: #1a202c;
+            --muted: #4a5568;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--white);
+            padding: 80px 20px 60px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        header .tagline {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 650px;
+            margin: 0 auto 24px;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .header-links a {
+            color: var(--white);
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        .header-links a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* Sections */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        section + section {
+            border-top: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        /* About */
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 750px;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .skill-card h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .skill-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* Experience */
+        .timeline-item {
+            margin-bottom: 32px;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .timeline-item .role {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .timeline-item .date {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            transition: box-shadow 0.2s;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .project-card h3 {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .project-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tech-tag {
+            background: var(--light);
+            color: var(--accent);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--light);
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: var(--muted);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 12px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .cta-btn:hover {
+            background: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            header .tagline { font-size: 1.05rem; }
+            section { padding: 40px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Bryan Contey</h1>
+        <p class="tagline">Investment Analytics Professional & Data Engineer. 9+ years turning complex financial data into clear insights and automated solutions.</p>
+        <div class="header-links">
+            <a href="mailto:bryan.contey23@gmail.com">Email Me</a>
+            <a href="https://www.linkedin.com/in/bryan-c-14731a82/" target="_blank">LinkedIn</a>
+            <a href="#projects">View Work</a>
+        </div>
+    </header>
+
+    <!-- About -->
+    <div class="container">
+        <section id="about">
+            <h2>About</h2>
+            <p class="about-text">
+                I combine deep investment management experience with hands-on technical skills to solve problems at the intersection of finance and data. I've supported ~$1T in AUM at Geode Capital, built trading automations at Vanguard, and developed analytics platforms across multiple asset management firms including Fidelity, Invesco, and S&P Global. I build dashboards, data pipelines, and automated reporting systems that help investment teams make better decisions faster.
+            </p>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <h2>What I Do</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Investment Analytics</h3>
+                    <p>Portfolio attribution, risk analysis, performance reporting, liquidity analytics. Experience across equity index, quant, and multi-asset mandates.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Data Engineering</h3>
+                    <p>Database design, ETL pipelines, API integrations (SEC EDGAR, market data), data validation and QA. Python, SQL, Excel/VBA.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Dashboards & Visualization</h3>
+                    <p>Executive dashboards and KPI reporting in Power BI and Tableau. Decision-ready visuals with clear narrative for leadership.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Process Automation</h3>
+                    <p>Python-based automation for trading ops, exception handling, and reporting workflows. Reduced manual processes ~20% at Geode Capital.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Consultative Solutions</h3>
+                    <p>Client-facing experience across wealth and institutional channels. Translate complex investment topics into clear presentations and commercial outcomes.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>AI-Augmented Development</h3>
+                    <p>Leveraging AI tools for rapid prototyping, data mapping, documentation, and development. Building next-gen financial data platforms.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience">
+            <h2>Experience</h2>
+
+            <div class="timeline-item">
+                <h3>Independent Consultant</h3>
+                <div class="role">Investment Data & Analytics</div>
+                <div class="date">May 2024 &ndash; Present | Chicago, IL</div>
+                <p>Building investment/market-data databases, automated pipelines, and executive dashboards. Delivering analytics-ready datasets and AI-accelerated prototypes for financial clients.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Geode Capital Management</h3>
+                <div class="role">Portfolio Analyst, Front Office &ndash; Quant Research & Portfolio Analytics</div>
+                <div class="date">Apr 2023 &ndash; May 2024 | Boston, MA</div>
+                <p>Built quantitative analytics supporting ~$1T AUM. Daily risk/performance reporting (141+ metrics). Partnered with developers to redesign research and trading tools.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Vanguard</h3>
+                <div class="role">Portfolio Investment Analyst &amp; Senior Associate, Private Wealth</div>
+                <div class="date">Oct 2020 &ndash; Apr 2023 | Scottsdale, AZ</div>
+                <p>Maintained investment book of record for equity index portfolios. Built Python automations for trading ops. Led consultative wealth management conversations.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Fidelity Investments</h3>
+                <div class="role">Investment Associate &ndash; FIAM Rotational Program</div>
+                <div class="date">Jun 2015 &ndash; Jul 2018 | New England & Chicago</div>
+                <p>Completed institutional asset management rotational program across trading, research, and client support. Promoted three times.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Earlier Roles</h3>
+                <div class="role">Zacks Investment Research &bull; Invesco &bull; S&P Global (SPIAS)</div>
+                <div class="date">2018 &ndash; 2020</div>
+                <p>Investment consulting, advisor engagement, portfolio construction support, and analytics across quantitative SMA strategies and workflow solutions.</p>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Market Data Platform</h3>
+                    <p>Investment data infrastructure with automated ingestion from SEC EDGAR and market data APIs. Schema design, validation, and analytics-ready output.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">REST APIs</span>
+                        <span class="tech-tag">ETL</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Options Flow Analytics</h3>
+                    <p>Gamma exposure mapping and options flow visualization for equities. Automated data aggregation and enhanced chart generation.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Matplotlib</span>
+                        <span class="tech-tag">Jupyter</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Executive Dashboards</h3>
+                    <p>KPI reporting and executive dashboards for investment leadership. Decision-ready visuals with clear narrative and drill-down capability.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Power BI</span>
+                        <span class="tech-tag">Tableau</span>
+                        <span class="tech-tag">SQL</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Trading Ops Automation</h3>
+                    <p>Exception-based process automation for equity index trading operations. Reduced manual workflows and improved accuracy and cycle time.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">VBA</span>
+                        <span class="tech-tag">Automation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <div class="container">
+            <h2>Let's Work Together</h2>
+            <p>Available for full-time roles, contract work, and consulting engagements in investment analytics, data engineering, and financial technology.</p>
+            <a href="mailto:bryan.contey23@gmail.com" class="cta-btn">Get in Touch</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Bryan Contey &copy; 2026 | Chicago, IL</p>
+    </footer>
+
+</body>
+</html>
