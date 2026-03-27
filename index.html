@@ -11,18 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0c0c0e;
-            --surface: #141416;
-            --surface-2: #1a1a1e;
-            --border: rgba(255,255,255,0.06);
-            --border-hover: rgba(255,255,255,0.12);
-            --text: #ebebeb;
-            --text-2: #a0a0a8;
-            --text-3: #636370;
-            --accent: #7c6aef;
-            --accent-soft: rgba(124,106,239,0.08);
-            --accent-text: #a899f7;
-            --white: #fff;
+            --bg:#0c0c0e;--surface:#141416;--surface-2:#1a1a1e;
+            --border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);
+            --text:#ebebeb;--text-2:#a0a0a8;--text-3:#636370;
+            --accent:#7c6aef;--accent-text:#a899f7;--white:#fff;
         }
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
@@ -36,8 +28,10 @@
         .nav-contact{color:var(--accent-text)!important;}
 
         .container{max-width:960px;margin:0 auto;padding:0 48px;}
+        .divider{height:1px;background:var(--border);margin:0;}
 
-        .hero{padding:160px 0 100px;display:flex;gap:48px;align-items:center;}
+        /* Hero */
+        .hero{padding:160px 0 80px;display:flex;gap:48px;align-items:center;}
         .hero-photo{flex-shrink:0;}
         .hero-photo img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid var(--border);}
         .hero-info{flex:1;}
@@ -45,40 +39,56 @@
         .hero-info h1 span{color:var(--accent-text);}
         .hero-sub{color:var(--text-2);font-size:1rem;line-height:1.7;max-width:520px;margin-bottom:24px;}
         .hero-meta{display:flex;gap:24px;align-items:center;flex-wrap:wrap;}
-        .hero-meta .status{display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-3);font-weight:500;}
+        .status{display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-3);font-weight:500;}
         .status-dot{width:6px;height:6px;border-radius:50%;background:#34d399;animation:blink 2s infinite;}
         @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.4;}}
         .hero-links{display:flex;gap:12px;}
-        .hero-links a{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:8px;font-size:0.84rem;font-weight:600;text-decoration:none;transition:all 0.2s;letter-spacing:-0.1px;}
+        .hero-links a,.cta-links a{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border-radius:8px;font-size:0.84rem;font-weight:600;text-decoration:none;transition:all 0.2s;letter-spacing:-0.1px;}
         .link-primary{background:var(--accent);color:var(--white);}
         .link-primary:hover{opacity:0.85;}
         .link-secondary{border:1px solid var(--border);color:var(--text-2);}
         .link-secondary:hover{border-color:var(--border-hover);color:var(--text);}
 
-        .divider{height:1px;background:var(--border);margin:0;}
-
+        /* Companies */
         .companies{padding:40px 0;display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
         .companies .label{font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-3);font-weight:600;flex-shrink:0;}
-        .companies span{color:var(--text-3);font-size:0.88rem;font-weight:500;transition:color 0.2s;}
-        .companies span:hover{color:var(--text-2);}
+        .companies span{color:var(--text-3);font-size:0.88rem;font-weight:500;}
 
+        /* Stats */
+        .results{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:48px 0;}
+        .result{text-align:center;padding:24px 16px;}
+        .result .num{font-size:1.8rem;font-weight:700;color:var(--text);letter-spacing:-1px;margin-bottom:4px;}
+        .result .num span{color:var(--accent-text);}
+        .result .label{font-size:0.78rem;color:var(--text-3);line-height:1.4;}
+
+        /* Section */
         .section{padding:80px 0;}
-        .section-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--text-3);font-weight:600;margin-bottom:36px;}
+        .section-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--text-3);font-weight:600;margin-bottom:12px;}
+        .section h2{font-size:1.5rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:8px;}
+        .section .section-sub{color:var(--text-2);font-size:0.92rem;margin-bottom:40px;max-width:560px;line-height:1.7;}
 
-        .tabs{display:flex;gap:4px;margin-bottom:36px;border-bottom:1px solid var(--border);padding-bottom:0;}
-        .tab{padding:10px 20px;font-size:0.84rem;font-weight:500;color:var(--text-3);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;}
-        .tab:hover{color:var(--text-2);}
-        .tab.active{color:var(--text);border-bottom-color:var(--accent);}
-        .tab-content{display:none;}
-        .tab-content.active{display:block;}
+        /* Services — expanded detail cards */
+        .service-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;margin-bottom:12px;transition:border-color 0.25s;}
+        .service-card:hover{border-color:var(--border-hover);}
+        .service-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:16px;}
+        .service-card h3{font-size:1.05rem;font-weight:600;letter-spacing:-0.3px;}
+        .service-card .service-tag{font-size:0.7rem;color:var(--accent-text);font-weight:500;text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:3px;}
+        .service-card .desc{color:var(--text-2);font-size:0.88rem;line-height:1.75;margin-bottom:16px;}
+        .service-card .details{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;}
+        .service-card .detail{display:flex;align-items:baseline;gap:8px;font-size:0.82rem;color:var(--text-3);line-height:1.5;}
+        .service-card .detail::before{content:"—";color:var(--accent-text);font-weight:600;flex-shrink:0;}
+        .service-card .outcome{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:0.82rem;color:var(--text-3);line-height:1.6;}
+        .service-card .outcome strong{color:var(--text-2);font-weight:600;}
 
-        .services-list{display:flex;flex-direction:column;gap:1px;}
-        .service-item{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:24px 0;border-bottom:1px solid var(--border);}
-        .service-item:last-child{border-bottom:none;}
-        .service-name{font-size:0.92rem;font-weight:600;color:var(--text);letter-spacing:-0.2px;}
-        .service-desc{font-size:0.9rem;color:var(--text-2);line-height:1.7;}
+        /* Who this is for */
+        .use-cases{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
+        .use-case{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px;transition:border-color 0.2s;}
+        .use-case:hover{border-color:var(--border-hover);}
+        .use-case h4{font-size:0.88rem;font-weight:600;margin-bottom:8px;letter-spacing:-0.2px;}
+        .use-case p{color:var(--text-3);font-size:0.82rem;line-height:1.65;}
 
-        .project{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:16px;transition:border-color 0.2s;}
+        /* Projects */
+        .project{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:12px;transition:border-color 0.2s;}
         .project:hover{border-color:var(--border-hover);}
         .project-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:16px;}
         .project h3{font-size:1rem;font-weight:600;letter-spacing:-0.3px;}
@@ -87,41 +97,38 @@
         .project-tags{display:flex;gap:6px;flex-wrap:wrap;}
         .tag{font-size:0.72rem;color:var(--text-3);background:var(--surface-2);padding:4px 10px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:500;}
 
-        .results{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:48px 0;}
-        .result{text-align:center;padding:24px 16px;}
-        .result .num{font-size:1.8rem;font-weight:700;color:var(--text);letter-spacing:-1px;margin-bottom:4px;}
-        .result .num span{color:var(--accent-text);}
-        .result .label{font-size:0.78rem;color:var(--text-3);line-height:1.4;}
+        /* How I Work */
+        .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+        .step{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 20px;text-align:center;}
+        .step-num{font-size:0.72rem;color:var(--accent-text);font-weight:700;letter-spacing:1px;margin-bottom:10px;}
+        .step h4{font-size:0.88rem;font-weight:600;margin-bottom:6px;letter-spacing:-0.2px;}
+        .step p{color:var(--text-3);font-size:0.8rem;line-height:1.6;}
 
+        /* About */
         .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
         .about-col h3{font-size:0.95rem;font-weight:600;margin-bottom:16px;letter-spacing:-0.2px;}
         .about-col p{color:var(--text-2);font-size:0.88rem;line-height:1.8;}
         .tech-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
 
+        /* CTA */
         .cta{padding:80px 0 100px;text-align:center;}
         .cta h2{font-size:1.6rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:12px;}
-        .cta p{color:var(--text-2);font-size:0.95rem;margin-bottom:28px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.7;}
+        .cta p{color:var(--text-2);font-size:0.95rem;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7;}
         .cta-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
         .cta-email{margin-top:16px;font-size:0.82rem;color:var(--text-3);}
         .cta-email a{color:var(--text-2);text-decoration:none;}
         .cta-email a:hover{color:var(--accent-text);}
 
         footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;font-size:0.78rem;color:var(--text-3);}
-        footer a{color:var(--text-3);text-decoration:none;}
-        footer a:hover{color:var(--text-2);}
 
         @media(max-width:768px){
-            nav{padding:14px 20px;}
-            .nav-links{gap:20px;}
-            .container{padding:0 24px;}
+            nav{padding:14px 20px;}.nav-links{gap:20px;}.container{padding:0 24px;}
             .hero{padding:120px 0 60px;flex-direction:column;gap:24px;text-align:center;}
-            .hero-info h1{font-size:1.8rem;}
-            .hero-meta{justify-content:center;}
-            .companies{justify-content:center;text-align:center;}
-            .service-item{grid-template-columns:1fr;gap:8px;}
-            .results{grid-template-columns:repeat(2,1fr);}
-            .about-grid{grid-template-columns:1fr;}
-            .tabs{overflow-x:auto;}
+            .hero-info h1{font-size:1.8rem;}.hero-meta{justify-content:center;}
+            .companies{justify-content:center;}.results{grid-template-columns:repeat(2,1fr);}
+            .service-card .details{grid-template-columns:1fr;}
+            .use-cases{grid-template-columns:1fr;}.process-steps{grid-template-columns:repeat(2,1fr);}
+            .about-grid{grid-template-columns:1fr;}.section{padding:60px 0;}
         }
     </style>
 </head>
@@ -130,15 +137,16 @@
 <nav>
     <div class="nav-name">Bryan Contey</div>
     <div class="nav-links">
+        <a href="#services">Services</a>
         <a href="#work">Work</a>
-        <a href="#services-link">Services</a>
-        <a href="#about-link">About</a>
+        <a href="#about">About</a>
         <a href="mailto:bryan.contey23@gmail.com" class="nav-contact">Contact</a>
     </div>
 </nav>
 
 <div class="container">
 
+    <!-- Hero -->
     <div class="hero">
         <div class="hero-photo">
             <img src="headshot.jpg" alt="Bryan Contey">
@@ -170,146 +178,240 @@
     <div class="divider"></div>
 
     <div class="results">
-        <div class="result">
-            <div class="num">$1T<span>+</span></div>
-            <div class="label">Assets supported</div>
+        <div class="result"><div class="num">$1T<span>+</span></div><div class="label">Assets supported</div></div>
+        <div class="result"><div class="num">141<span>+</span></div><div class="label">Production metrics</div></div>
+        <div class="result"><div class="num">20<span>%</span></div><div class="label">Workflow reduction</div></div>
+        <div class="result"><div class="num">3<span>x</span></div><div class="label">Promoted at Fidelity</div></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ==================== SERVICES ==================== -->
+    <div class="section" id="services">
+        <div class="section-label">Services</div>
+        <h2>What I do for your business</h2>
+        <p class="section-sub">Every engagement is built around your specific needs. Here's how I typically help companies move from idea to production.</p>
+
+        <!-- Service 1 -->
+        <div class="service-card">
+            <div class="service-card-top">
+                <h3>LLM Integration &amp; RAG Systems</h3>
+                <span class="service-tag">Most Requested</span>
+            </div>
+            <div class="desc">I connect your business data to large language models so your team can search, summarize, and reason over your own documents, databases, and knowledge bases. Not a chatbot wrapper — a production system with proper retrieval, validation, and error handling.</div>
+            <div class="details">
+                <span class="detail">Custom RAG pipelines over your documents</span>
+                <span class="detail">Claude, GPT, and open-source model integration</span>
+                <span class="detail">Retrieval accuracy tuning and evaluation</span>
+                <span class="detail">API endpoints your team can build on</span>
+                <span class="detail">Guardrails, logging, and monitoring</span>
+                <span class="detail">Integration with existing tools and workflows</span>
+            </div>
+            <div class="outcome"><strong>Typical outcome:</strong> Teams go from manually searching through documents to getting accurate, sourced answers in seconds. One client replaced a $50K/yr data subscription entirely.</div>
         </div>
-        <div class="result">
-            <div class="num">141<span>+</span></div>
-            <div class="label">Production metrics</div>
+
+        <!-- Service 2 -->
+        <div class="service-card">
+            <div class="service-card-top">
+                <h3>Data Pipelines &amp; Infrastructure</h3>
+                <span class="service-tag">Foundation</span>
+            </div>
+            <div class="desc">Your AI is only as good as your data. I build the automated pipelines that ingest, clean, validate, and serve your data — so your models and dashboards always have something reliable to work with.</div>
+            <div class="details">
+                <span class="detail">Automated ETL from APIs, databases, files</span>
+                <span class="detail">Data validation and quality checks</span>
+                <span class="detail">Schema design and database architecture</span>
+                <span class="detail">SEC EDGAR, market data, and financial feeds</span>
+                <span class="detail">Scheduling and monitoring</span>
+                <span class="detail">Migration from manual spreadsheet workflows</span>
+            </div>
+            <div class="outcome"><strong>Typical outcome:</strong> Hours of weekly manual data work reduced to zero. Clean, validated data available automatically for reporting, analysis, and AI systems.</div>
         </div>
-        <div class="result">
-            <div class="num">20<span>%</span></div>
-            <div class="label">Workflow reduction</div>
+
+        <!-- Service 3 -->
+        <div class="service-card">
+            <div class="service-card-top">
+                <h3>Process Automation &amp; Intelligent Workflows</h3>
+                <span class="service-tag">High ROI</span>
+            </div>
+            <div class="desc">I find the repetitive, error-prone processes in your business and replace them with intelligent automation. Not just scripts — systems that handle exceptions, adapt to edge cases, and scale with your team.</div>
+            <div class="details">
+                <span class="detail">Document processing and extraction</span>
+                <span class="detail">Automated reporting and alerts</span>
+                <span class="detail">Exception-based workflows</span>
+                <span class="detail">Email and communication automation</span>
+                <span class="detail">Multi-step approval and routing</span>
+                <span class="detail">Integration between disconnected systems</span>
+            </div>
+            <div class="outcome"><strong>Typical outcome:</strong> 20%+ reduction in manual work. At Vanguard, I automated global trading operations that previously required constant manual intervention.</div>
         </div>
-        <div class="result">
-            <div class="num">3<span>x</span></div>
-            <div class="label">Promoted at Fidelity</div>
+
+        <!-- Service 4 -->
+        <div class="service-card">
+            <div class="service-card-top">
+                <h3>Dashboards &amp; Executive Analytics</h3>
+                <span class="service-tag">Visibility</span>
+            </div>
+            <div class="desc">I build dashboards that actually get used — because they answer the questions your leadership is asking, not just display raw numbers. Clear narrative, decision-ready visuals, real-time data.</div>
+            <div class="details">
+                <span class="detail">Power BI and Tableau implementations</span>
+                <span class="detail">Custom web-based dashboards</span>
+                <span class="detail">KPI design and metric frameworks</span>
+                <span class="detail">Real-time and scheduled reporting</span>
+                <span class="detail">Risk, performance, and operations views</span>
+                <span class="detail">Mobile-friendly executive summaries</span>
+            </div>
+            <div class="outcome"><strong>Typical outcome:</strong> Leadership gets the answers they need without asking analysts to pull data. At Geode Capital, I built 141+ metric daily reporting supporting $1T in AUM.</div>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card">
+            <div class="service-card-top">
+                <h3>AI Strategy &amp; Roadmapping</h3>
+                <span class="service-tag">Starting Point</span>
+            </div>
+            <div class="desc">Not sure where to start with AI? I'll assess your operations, identify the highest-impact opportunities, and build a practical implementation plan with clear timelines, costs, and expected ROI. No jargon, no hype — just honest answers about what will work for your business.</div>
+            <div class="details">
+                <span class="detail">Current-state assessment</span>
+                <span class="detail">Opportunity identification and prioritization</span>
+                <span class="detail">Build vs. buy recommendations</span>
+                <span class="detail">Implementation roadmap with milestones</span>
+                <span class="detail">Cost-benefit analysis</span>
+                <span class="detail">Team capability and tooling assessment</span>
+            </div>
+            <div class="outcome"><strong>Typical outcome:</strong> A clear, prioritized plan your team can execute on — starting with the quick wins that build momentum and prove ROI before larger investments.</div>
         </div>
     </div>
 
     <div class="divider"></div>
 
+    <!-- ==================== WHO THIS IS FOR ==================== -->
+    <div class="section">
+        <div class="section-label">Who I work with</div>
+        <h2>Is this right for your business?</h2>
+        <p class="section-sub">I work with companies across industries who are ready to move beyond AI experiments and into production systems.</p>
+
+        <div class="use-cases">
+            <div class="use-case">
+                <h4>Startups &amp; Growth Companies</h4>
+                <p>You need AI built into your product but don't have the in-house expertise yet. I build the first version, then help you hire and hand off.</p>
+            </div>
+            <div class="use-case">
+                <h4>Financial Services</h4>
+                <p>Deep domain experience across asset management, trading, and advisory. I understand the data, the compliance requirements, and the workflows.</p>
+            </div>
+            <div class="use-case">
+                <h4>Mid-Market &amp; Enterprise</h4>
+                <p>You have data and processes but haven't figured out where AI fits. I identify the opportunities, build the systems, and train your team to maintain them.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ==================== HOW I WORK ==================== -->
+    <div class="section">
+        <div class="section-label">Process</div>
+        <h2>How engagements work</h2>
+        <p class="section-sub">Clear scope, fast delivery, no surprises. You see working software early and often.</p>
+
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-num">01</div>
+                <h4>Discovery</h4>
+                <p>30-minute call. I learn about your business, your pain points, and where AI can help. Free, no commitment.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <h4>Scope &amp; Plan</h4>
+                <p>Clear proposal with deliverables, timeline, and cost. You approve before any work starts.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <h4>Build &amp; Demo</h4>
+                <p>Weekly demos of working software. You give feedback, I iterate. No disappearing for months.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">04</div>
+                <h4>Ship &amp; Support</h4>
+                <p>Production deployment with documentation. Your team owns it. I'm available for ongoing support.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ==================== WORK ==================== -->
     <div class="section" id="work">
-        <div class="tabs">
-            <button class="tab active" data-tab="projects">Selected Work</button>
-            <button class="tab" data-tab="services">Services</button>
-            <button class="tab" data-tab="about">About &amp; Stack</button>
-        </div>
+        <div class="section-label">Selected Work</div>
+        <h2>Production systems, real results</h2>
+        <p class="section-sub">Every project below is a real system built for real users — not a demo or proof-of-concept.</p>
 
-        <div class="tab-content active" id="projects">
-            <div class="project">
-                <div class="project-top">
-                    <h3>Morningstar Data Replacement Platform</h3>
-                    <span class="project-label">AI + Data Engineering</span>
-                </div>
-                <p>Full-stack platform replacing expensive Morningstar subscriptions. Automated SEC EDGAR ingestion with AI-powered validation, serving fund profiles through interactive dashboards. Saving $50K+/yr in data costs.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Flask</span>
-                    <span class="tag">SEC EDGAR</span>
-                    <span class="tag">SQLite</span>
-                    <span class="tag">Chart.js</span>
-                </div>
+        <div class="project">
+            <div class="project-top">
+                <h3>Morningstar Data Replacement Platform</h3>
+                <span class="project-label">AI + Data Engineering</span>
             </div>
-
-            <div class="project">
-                <div class="project-top">
-                    <h3>AlphaPulse — AI Market Analytics</h3>
-                    <span class="project-label">Quantitative Analytics</span>
-                </div>
-                <p>AI-powered investment analytics with real-time options flow analysis, gamma exposure mapping, and automated signal detection. Built for institutional-grade decision support.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Pandas</span>
-                    <span class="tag">Matplotlib</span>
-                    <span class="tag">Market APIs</span>
-                </div>
-            </div>
-
-            <div class="project">
-                <div class="project-top">
-                    <h3>$1T AUM Risk &amp; Performance System</h3>
-                    <span class="project-label">Geode Capital</span>
-                </div>
-                <p>Daily risk/performance reporting covering 141+ metrics. Partnered with PMs and traders to surface performance drivers, exposures, and positioning across mandates.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">SQL</span>
-                    <span class="tag">Power BI</span>
-                    <span class="tag">Tableau</span>
-                </div>
-            </div>
-
-            <div class="project">
-                <div class="project-top">
-                    <h3>Trading Operations Automation</h3>
-                    <span class="project-label">Vanguard</span>
-                </div>
-                <p>Python automation suite for equity index trading ops. Transformed manual exception handling into automated workflows, improving accuracy and cycle time across global operations.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Automation</span>
-                    <span class="tag">Trading Ops</span>
-                </div>
+            <p>Full-stack platform replacing expensive Morningstar subscriptions. Automated SEC EDGAR ingestion with AI-powered validation, serving fund profiles through interactive dashboards. Saving a client $50K+/yr in data costs.</p>
+            <div class="project-tags">
+                <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SEC EDGAR</span><span class="tag">SQLite</span><span class="tag">Chart.js</span>
             </div>
         </div>
 
-        <div class="tab-content" id="services">
-            <div class="services-list">
-                <div class="service-item">
-                    <div class="service-name">AI Strategy</div>
-                    <div class="service-desc">Identify where AI creates real value in your business. Practical roadmaps with clear ROI — not slide decks.</div>
-                </div>
-                <div class="service-item">
-                    <div class="service-name">LLM Integration</div>
-                    <div class="service-desc">Connect your business data to language models. RAG pipelines, Claude/GPT integrations, and intelligent agents that work with your existing systems.</div>
-                </div>
-                <div class="service-item">
-                    <div class="service-name">Data Pipelines</div>
-                    <div class="service-desc">Automated ingestion, transformation, and validation. Your AI is only as good as your data — I make sure it's clean, reliable, and production-ready.</div>
-                </div>
-                <div class="service-item">
-                    <div class="service-name">Process Automation</div>
-                    <div class="service-desc">Eliminate repetitive workflows with intelligent automation. Document processing, reporting, decision support — designed to scale.</div>
-                </div>
-                <div class="service-item">
-                    <div class="service-name">Dashboards</div>
-                    <div class="service-desc">Executive analytics that tell a story. Power BI, Tableau, and custom web apps built for clarity and action.</div>
-                </div>
-                <div class="service-item">
-                    <div class="service-name">Full-Stack Apps</div>
-                    <div class="service-desc">End-to-end data applications. Python backends, REST APIs, database design, and front-end interfaces — shipped production-ready.</div>
-                </div>
+        <div class="project">
+            <div class="project-top">
+                <h3>AlphaPulse — AI Market Analytics</h3>
+                <span class="project-label">Quantitative Analytics</span>
+            </div>
+            <p>AI-powered investment analytics with real-time options flow analysis, gamma exposure mapping, and automated signal detection. Built for institutional-grade decision support.</p>
+            <div class="project-tags">
+                <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Market APIs</span>
             </div>
         </div>
 
-        <div class="tab-content" id="about">
-            <div class="about-grid">
-                <div class="about-col">
-                    <h3>Background</h3>
-                    <p>10+ years building systems at the intersection of finance and technology. Started at Fidelity where I was promoted three times into the FIAM institutional rotational program. Built quantitative analytics at Geode Capital supporting $1T in AUM, and automated trading operations at Vanguard. Now I help businesses of all sizes implement AI that delivers measurable results.</p>
-                </div>
-                <div class="about-col">
-                    <h3>Technical Stack</h3>
-                    <div class="tech-list">
-                        <span class="tag">Python</span>
-                        <span class="tag">SQL</span>
-                        <span class="tag">Claude / GPT</span>
-                        <span class="tag">RAG Systems</span>
-                        <span class="tag">LangChain</span>
-                        <span class="tag">Flask</span>
-                        <span class="tag">REST APIs</span>
-                        <span class="tag">Power BI</span>
-                        <span class="tag">Tableau</span>
-                        <span class="tag">Pandas</span>
-                        <span class="tag">Git</span>
-                        <span class="tag">Excel / VBA</span>
-                        <span class="tag">Bloomberg</span>
-                        <span class="tag">FactSet</span>
-                        <span class="tag">Jupyter</span>
-                        <span class="tag">Claude Code</span>
-                    </div>
+        <div class="project">
+            <div class="project-top">
+                <h3>$1T AUM Risk &amp; Performance System</h3>
+                <span class="project-label">Geode Capital</span>
+            </div>
+            <p>Daily risk/performance reporting covering 141+ metrics. Partnered with PMs and traders to surface performance drivers, exposures, and positioning across mandates.</p>
+            <div class="project-tags">
+                <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Tableau</span>
+            </div>
+        </div>
+
+        <div class="project">
+            <div class="project-top">
+                <h3>Trading Operations Automation</h3>
+                <span class="project-label">Vanguard</span>
+            </div>
+            <p>Python automation suite for equity index trading ops. Transformed manual exception handling into automated workflows, improving accuracy and cycle time across global operations.</p>
+            <div class="project-tags">
+                <span class="tag">Python</span><span class="tag">Automation</span><span class="tag">Trading Ops</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ==================== ABOUT ==================== -->
+    <div class="section" id="about">
+        <div class="section-label">About</div>
+        <h2>Background</h2>
+        <div class="about-grid" style="margin-top:32px;">
+            <div class="about-col">
+                <h3>Experience</h3>
+                <p>10+ years building systems at the intersection of finance and technology. Started at Fidelity where I was promoted three times into the FIAM institutional rotational program — one of the industry's most competitive tracks. Built quantitative analytics at Geode Capital supporting $1T in AUM. Automated trading operations at Vanguard. Now I help businesses of all sizes implement AI that delivers measurable results.</p>
+            </div>
+            <div class="about-col">
+                <h3>Technical Stack</h3>
+                <div class="tech-list">
+                    <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Claude / GPT</span>
+                    <span class="tag">RAG Systems</span><span class="tag">LangChain</span><span class="tag">Flask</span>
+                    <span class="tag">REST APIs</span><span class="tag">Power BI</span><span class="tag">Tableau</span>
+                    <span class="tag">Pandas</span><span class="tag">Git</span><span class="tag">Excel / VBA</span>
+                    <span class="tag">Bloomberg</span><span class="tag">FactSet</span><span class="tag">Jupyter</span>
+                    <span class="tag">Claude Code</span>
                 </div>
             </div>
         </div>
@@ -317,9 +419,10 @@
 
     <div class="divider"></div>
 
+    <!-- ==================== CTA ==================== -->
     <div class="cta">
         <h2>Let's work together</h2>
-        <p>Whether you're exploring AI for the first time or scaling existing systems — I'd like to hear about what you're building.</p>
+        <p>Start with a free 30-minute discovery call. I'll give you an honest assessment of where AI can help your business — and where it can't. No pitch, no obligation.</p>
         <div class="cta-links">
             <a href="mailto:bryan.contey23@gmail.com" class="link-primary">Get in touch</a>
             <a href="https://www.linkedin.com/in/bryan-c-14731a82/" target="_blank" class="link-secondary">LinkedIn</a>
@@ -329,30 +432,7 @@
 
 </div>
 
-<footer>
-    <div class="container">&copy; 2026 Bryan Contey</div>
-</footer>
-
-<script>
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).classList.add('active');
-    });
-});
-document.querySelector('a[href="#services-link"]').addEventListener('click', (e) => {
-    e.preventDefault();
-    document.querySelector('[data-tab="services"]').click();
-    document.getElementById('work').scrollIntoView({behavior:'smooth'});
-});
-document.querySelector('a[href="#about-link"]').addEventListener('click', (e) => {
-    e.preventDefault();
-    document.querySelector('[data-tab="about"]').click();
-    document.getElementById('work').scrollIntoView({behavior:'smooth'});
-});
-</script>
+<footer><div class="container">&copy; 2026 Bryan Contey</div></footer>
 
 </body>
 </html>
