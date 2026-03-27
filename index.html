@@ -4,139 +4,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bryan Contey — AI Consultant & Engineer</title>
-    <meta name="description" content="AI consultant helping businesses implement production AI systems. 10+ years across Fidelity, Vanguard, and Geode Capital.">
+    <meta name="description" content="AI consultant helping businesses implement production AI systems. LLM integrations, data pipelines, intelligent automation.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root{--bg:#0b0b0d;--s1:#131315;--s2:#1a1a1d;--s3:#222226;--bd:rgba(255,255,255,0.055);--bh:rgba(255,255,255,0.1);--t1:#f0f0f2;--t2:#a1a1ad;--t3:#6b6b78;--ac:#7c6aef;--at:#a899f7;--gr:#34d399;--w:#fff;}
+        :root{
+            --bg:#09090b;--s1:#111113;--s2:#18181b;--s3:#222225;
+            --bd:rgba(255,255,255,0.05);--bh:rgba(255,255,255,0.09);
+            --t1:#f4f4f5;--t2:#a1a1aa;--t3:#63636e;--t4:#3f3f46;
+            --ac:#7c6aef;--at:#a899f7;--ac2:#c4b5fd;--gr:#34d399;--w:#fff;
+        }
         *{margin:0;padding:0;box-sizing:border-box;}
         html{scroll-behavior:smooth;}
         body{font-family:'DM Sans',system-ui,sans-serif;color:var(--t1);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:15px;}
-        ::selection{background:rgba(124,106,239,0.25);}
+        ::selection{background:rgba(124,106,239,0.2);}
+
+        /* Subtle noise texture overlay */
+        body::before{
+            content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+            opacity:0.025;pointer-events:none;z-index:0;
+            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* Ambient glow orbs */
+        .glow-1,.glow-2{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(120px);}
+        .glow-1{width:600px;height:600px;top:-200px;right:-100px;background:rgba(124,106,239,0.04);}
+        .glow-2{width:500px;height:500px;bottom:-150px;left:-100px;background:rgba(52,211,153,0.025);}
+
+        .content{position:relative;z-index:1;}
 
         /* Nav */
-        nav{position:fixed;top:0;width:100%;padding:20px 0;z-index:100;background:rgba(11,11,13,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);}
-        .nav-inner{max-width:880px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:center;}
-        .nav-name{font-weight:600;font-size:0.95rem;color:var(--t1);letter-spacing:-0.3px;}
-        .nav-links{display:flex;gap:36px;align-items:center;}
-        .nav-links a{color:var(--t3);text-decoration:none;font-size:0.84rem;font-weight:500;transition:color 0.2s;letter-spacing:0.1px;}
-        .nav-links a:hover{color:var(--t2);}
+        nav{position:fixed;top:0;width:100%;padding:0;z-index:100;background:rgba(9,9,11,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--bd);}
+        .nav-inner{max-width:900px;margin:0 auto;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;}
+        .nav-name{font-weight:600;font-size:0.82rem;color:var(--t2);letter-spacing:0.3px;text-transform:uppercase;letter-spacing:1.5px;}
+        .nav-links{display:flex;gap:32px;align-items:center;}
+        .nav-links a{color:var(--t3);text-decoration:none;font-size:0.82rem;font-weight:500;transition:color 0.2s;}
+        .nav-links a:hover{color:var(--t1);}
         .nav-cta{color:var(--at)!important;font-weight:600!important;}
 
-        .wrap{max-width:880px;margin:0 auto;padding:0 40px;}
-        .div{height:1px;background:var(--bd);}
+        .wrap{max-width:900px;margin:0 auto;padding:0 40px;}
 
-        /* Hero — compact, confident */
-        .hero{padding:160px 0 72px;display:flex;gap:44px;align-items:center;}
-        .hero img{width:130px;height:130px;border-radius:50%;object-fit:cover;border:2px solid var(--bd);flex-shrink:0;}
-        .hero-info h1{font-size:1.75rem;font-weight:700;letter-spacing:-0.8px;line-height:1.2;margin-bottom:12px;}
-        .hero-info h1 em{font-style:normal;color:var(--at);}
-        .hero-info p{color:var(--t2);font-size:0.92rem;line-height:1.75;margin-bottom:20px;max-width:500px;}
-        .hero-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
-        .badge{display:inline-flex;align-items:center;gap:5px;font-size:0.75rem;color:var(--t3);font-weight:500;}
+        /* Divider with subtle gradient */
+        .div{height:1px;background:linear-gradient(90deg,transparent,var(--bd) 20%,var(--bd) 80%,transparent);}
+
+        /* Hero */
+        .hero{padding:150px 0 72px;display:flex;gap:44px;align-items:center;}
+        .hero-photo{flex-shrink:0;position:relative;}
+        .hero-photo img{width:128px;height:128px;border-radius:50%;object-fit:cover;border:1.5px solid var(--bd);}
+        .hero-photo::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(124,106,239,0.12);pointer-events:none;}
+        .hero-info h1{font-size:1.7rem;font-weight:600;letter-spacing:-0.6px;line-height:1.25;margin-bottom:14px;color:var(--t1);}
+        .hero-info h1 em{font-style:normal;background:linear-gradient(135deg,var(--ac),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .hero-sub{color:var(--t2);font-size:0.9rem;line-height:1.8;margin-bottom:22px;max-width:500px;font-weight:400;}
+        .hero-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+        .badge{display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--t3);font-weight:500;}
         .dot{width:5px;height:5px;border-radius:50%;background:var(--gr);animation:p 2s infinite;}
         @keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
-        .btn{display:inline-flex;align-items:center;padding:8px 18px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;transition:all 0.2s;letter-spacing:-0.1px;}
-        .btn-p{background:var(--ac);color:var(--w);}
-        .btn-p:hover{opacity:.85;}
-        .btn-s{border:1px solid var(--bd);color:var(--t2);}
-        .btn-s:hover{border-color:var(--bh);color:var(--t1);}
+        .btn{display:inline-flex;align-items:center;padding:9px 20px;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:all 0.25s;letter-spacing:-0.1px;}
+        .btn-p{background:var(--ac);color:var(--w);box-shadow:0 0 20px rgba(124,106,239,0.15);}
+        .btn-p:hover{box-shadow:0 0 32px rgba(124,106,239,0.25);transform:translateY(-1px);}
+        .btn-s{border:1px solid var(--bd);color:var(--t2);background:transparent;}
+        .btn-s:hover{border-color:var(--bh);color:var(--t1);background:rgba(255,255,255,0.02);}
 
-        /* Logos strip */
-        .logos{padding:28px 0;display:flex;align-items:center;gap:32px;flex-wrap:wrap;}
-        .logos .lbl{font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--t3);font-weight:600;}
-        .logos span{color:var(--t3);font-size:0.82rem;font-weight:500;}
+        /* Value props — replaces old stats */
+        .value-bar{padding:40px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;}
+        .value-item{text-align:center;padding:0 12px;}
+        .value-item .v-icon{font-size:1.1rem;margin-bottom:6px;display:block;}
+        .value-item .v-title{font-size:0.78rem;font-weight:600;color:var(--t1);letter-spacing:-0.1px;margin-bottom:2px;}
+        .value-item .v-desc{font-size:0.7rem;color:var(--t3);line-height:1.45;}
 
-        /* Stats inline */
-        .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;margin:40px 0;}
-        .stat{background:var(--s1);text-align:center;padding:24px 12px;}
-        .stat .n{font-size:1.5rem;font-weight:700;letter-spacing:-1px;color:var(--t1);}
-        .stat .n em{font-style:normal;color:var(--at);}
-        .stat .l{font-size:0.72rem;color:var(--t3);margin-top:2px;}
-
-        /* Section headers */
+        /* Sections */
         .sec{padding:72px 0 0;}
-        .sec-head{margin-bottom:36px;}
-        .sec-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--t3);font-weight:600;margin-bottom:8px;}
-        .sec-head h2{font-size:1.3rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:4px;}
-        .sec-head p{color:var(--t2);font-size:0.88rem;max-width:500px;line-height:1.65;}
+        .sec-label{font-size:0.62rem;text-transform:uppercase;letter-spacing:3px;color:var(--t4);font-weight:600;margin-bottom:10px;}
+        .sec h2{font-size:1.25rem;font-weight:600;letter-spacing:-0.4px;margin-bottom:6px;}
+        .sec .sec-sub{color:var(--t3);font-size:0.86rem;margin-bottom:36px;max-width:480px;line-height:1.7;}
 
-        /* ===== SERVICES — the star of the show ===== */
-        .svc{background:var(--s1);border:1px solid var(--bd);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color 0.25s;}
+        /* ===== SERVICES — accordion ===== */
+        .svc{border:1px solid var(--bd);border-radius:10px;margin-bottom:8px;overflow:hidden;transition:all 0.3s;background:var(--s1);}
         .svc:hover{border-color:var(--bh);}
-        .svc-top{display:flex;justify-content:space-between;align-items:center;padding:22px 28px;cursor:pointer;gap:16px;}
-        .svc-top h3{font-size:0.95rem;font-weight:600;letter-spacing:-0.2px;display:flex;align-items:center;gap:10px;}
-        .svc-tag{font-size:0.62rem;color:var(--at);font-weight:600;text-transform:uppercase;letter-spacing:1.2px;background:rgba(124,106,239,0.08);padding:3px 8px;border-radius:4px;}
-        .svc-toggle{color:var(--t3);font-size:0.8rem;transition:transform 0.3s;flex-shrink:0;}
-        .svc.open .svc-toggle{transform:rotate(180deg);}
-        .svc-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease;}
-        .svc.open .svc-body{max-height:600px;}
-        .svc-inner{padding:0 28px 24px;}
-        .svc-desc{color:var(--t2);font-size:0.86rem;line-height:1.75;margin-bottom:16px;}
-        .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;}
-        .svc-item{font-size:0.8rem;color:var(--t3);line-height:1.5;padding:3px 0;padding-left:16px;position:relative;}
-        .svc-item::before{content:"→";position:absolute;left:0;color:var(--at);font-size:0.7rem;font-weight:700;}
-        .svc-result{margin-top:14px;padding-top:14px;border-top:1px solid var(--bd);font-size:0.8rem;color:var(--t3);line-height:1.6;}
+        .svc-top{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;cursor:pointer;gap:16px;transition:background 0.2s;}
+        .svc-top:hover{background:rgba(255,255,255,0.01);}
+        .svc-top h3{font-size:0.9rem;font-weight:600;letter-spacing:-0.2px;display:flex;align-items:center;gap:10px;}
+        .svc-tag{font-size:0.58rem;color:var(--at);font-weight:600;text-transform:uppercase;letter-spacing:1px;background:rgba(124,106,239,0.07);padding:3px 7px;border-radius:3px;}
+        .svc-toggle{color:var(--t4);font-size:0.65rem;transition:transform 0.3s;flex-shrink:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:4px;background:rgba(255,255,255,0.03);}
+        .svc.open .svc-toggle{transform:rotate(180deg);color:var(--at);}
+        .svc-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+        .svc.open .svc-body{max-height:500px;}
+        .svc-inner{padding:0 24px 22px;}
+        .svc-desc{color:var(--t2);font-size:0.84rem;line-height:1.8;margin-bottom:16px;}
+        .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 20px;}
+        .svc-item{font-size:0.78rem;color:var(--t3);line-height:1.5;padding:3px 0 3px 16px;position:relative;}
+        .svc-item::before{content:"→";position:absolute;left:0;color:var(--at);font-size:0.68rem;font-weight:700;}
+        .svc-result{margin-top:14px;padding-top:14px;border-top:1px solid var(--bd);font-size:0.78rem;color:var(--t3);line-height:1.65;}
         .svc-result strong{color:var(--t2);font-weight:600;}
 
-        /* ===== PROCESS — clear 4-step ===== */
-        .proc{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;}
-        .proc-step{background:var(--s1);padding:28px 20px;position:relative;}
-        .proc-num{font-size:2rem;font-weight:700;color:var(--at);opacity:0.35;letter-spacing:-1px;margin-bottom:8px;line-height:1;}
-        .proc-step h4{font-size:0.88rem;font-weight:600;margin-bottom:6px;letter-spacing:-0.2px;}
-        .proc-step p{color:var(--t3);font-size:0.78rem;line-height:1.6;}
-        .proc-arrow{position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:var(--at);font-size:0.7rem;z-index:1;background:var(--s1);padding:4px 0;}
+        /* ===== PROCESS ===== */
+        .proc{position:relative;}
+        .proc-line{position:absolute;top:28px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--ac) 0%,var(--bd) 100%);opacity:0.2;}
+        .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+        .proc-step{padding:0 20px 0 0;position:relative;}
+        .proc-dot{width:8px;height:8px;border-radius:50%;background:var(--ac);margin-bottom:16px;box-shadow:0 0 12px rgba(124,106,239,0.3);}
+        .proc-step h4{font-size:0.86rem;font-weight:600;margin-bottom:4px;letter-spacing:-0.2px;}
+        .proc-step .proc-num{font-size:0.6rem;color:var(--t4);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:6px;}
+        .proc-step p{color:var(--t3);font-size:0.78rem;line-height:1.65;}
 
-        /* Who for — inline */
-        .who{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border-radius:10px;overflow:hidden;}
-        .who-item{background:var(--s1);padding:24px 20px;}
-        .who-item h4{font-size:0.84rem;font-weight:600;margin-bottom:4px;letter-spacing:-0.2px;}
-        .who-item p{color:var(--t3);font-size:0.78rem;line-height:1.6;}
+        /* Who I help */
+        .who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+        .who-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:22px 20px;transition:border-color 0.2s;}
+        .who-card:hover{border-color:var(--bh);}
+        .who-card h4{font-size:0.84rem;font-weight:600;margin-bottom:5px;letter-spacing:-0.2px;}
+        .who-card p{color:var(--t3);font-size:0.78rem;line-height:1.65;}
 
-        /* Projects — compact list */
-        .proj{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-        .proj-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:24px;transition:border-color 0.2s;}
+        /* Projects — compact 2x2 */
+        .proj{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+        .proj-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:22px;transition:border-color 0.2s;}
         .proj-card:hover{border-color:var(--bh);}
-        .proj-card .proj-type{font-size:0.62rem;color:var(--at);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;margin-bottom:8px;}
-        .proj-card h3{font-size:0.92rem;font-weight:600;letter-spacing:-0.2px;margin-bottom:6px;}
-        .proj-card p{color:var(--t3);font-size:0.8rem;line-height:1.65;margin-bottom:12px;}
-        .tags{display:flex;gap:5px;flex-wrap:wrap;}
-        .tg{font-size:0.68rem;color:var(--t3);background:var(--s2);padding:3px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-weight:500;}
+        .proj-type{font-size:0.58rem;color:var(--at);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;margin-bottom:8px;}
+        .proj-card h3{font-size:0.88rem;font-weight:600;letter-spacing:-0.2px;margin-bottom:5px;}
+        .proj-card p{color:var(--t3);font-size:0.78rem;line-height:1.6;margin-bottom:12px;}
+        .tags{display:flex;gap:4px;flex-wrap:wrap;}
+        .tg{font-size:0.66rem;color:var(--t4);background:var(--s2);padding:3px 8px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-weight:500;border:1px solid var(--bd);}
 
         /* About */
         .about{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
-        .about h3{font-size:0.9rem;font-weight:600;margin-bottom:12px;letter-spacing:-0.2px;}
-        .about p{color:var(--t2);font-size:0.84rem;line-height:1.8;}
-        .tech{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
+        .about h3{font-size:0.88rem;font-weight:600;margin-bottom:12px;letter-spacing:-0.2px;}
+        .about p{color:var(--t2);font-size:0.82rem;line-height:1.85;}
+        .tech{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px;}
+
+        /* Logos */
+        .logos{padding:12px 0 0;display:flex;gap:20px;flex-wrap:wrap;}
+        .logos span{font-size:0.72rem;color:var(--t4);font-weight:500;}
 
         /* CTA */
         .cta{padding:80px 0 96px;text-align:center;}
-        .cta h2{font-size:1.4rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:10px;}
-        .cta>p{color:var(--t2);font-size:0.9rem;margin-bottom:24px;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.7;}
+        .cta h2{font-size:1.35rem;font-weight:600;letter-spacing:-0.4px;margin-bottom:10px;}
+        .cta>p{color:var(--t2);font-size:0.88rem;margin-bottom:24px;max-width:420px;margin-left:auto;margin-right:auto;line-height:1.7;}
         .cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-        .cta-sub{margin-top:14px;font-size:0.78rem;color:var(--t3);}
-        .cta-sub a{color:var(--t2);text-decoration:none;}
+        .cta-sub{margin-top:14px;font-size:0.78rem;color:var(--t4);}
+        .cta-sub a{color:var(--t3);text-decoration:none;}
         .cta-sub a:hover{color:var(--at);}
 
-        footer{padding:28px 0;border-top:1px solid var(--bd);text-align:center;font-size:0.72rem;color:var(--t3);}
+        footer{padding:28px 0;border-top:1px solid var(--bd);text-align:center;font-size:0.7rem;color:var(--t4);}
 
         @media(max-width:768px){
             .nav-inner,.wrap{padding:0 20px;}
-            .hero{flex-direction:column;gap:20px;text-align:center;padding:120px 0 48px;}
-            .hero-info p{max-width:100%;}
+            .hero{flex-direction:column;gap:24px;text-align:center;padding:120px 0 56px;}
+            .hero-sub{max-width:100%;}
             .hero-row{justify-content:center;}
-            .logos{justify-content:center;}
-            .stats{grid-template-columns:repeat(2,1fr);}
+            .value-bar{grid-template-columns:repeat(2,1fr);gap:16px;}
             .svc-grid{grid-template-columns:1fr;}
-            .proc{grid-template-columns:repeat(2,1fr);}
-            .proc-arrow{display:none;}
-            .who{grid-template-columns:1fr;}
+            .proc-grid{grid-template-columns:repeat(2,1fr);gap:24px;}
+            .proc-line{display:none;}
+            .who-grid{grid-template-columns:1fr;}
             .proj{grid-template-columns:1fr;}
             .about{grid-template-columns:1fr;}
         }
     </style>
 </head>
 <body>
+
+<div class="glow-1"></div>
+<div class="glow-2"></div>
+
+<div class="content">
 
 <nav><div class="nav-inner">
     <div class="nav-name">Bryan Contey</div>
@@ -153,12 +182,14 @@
 
     <!-- HERO -->
     <div class="hero">
-        <img src="headshot.jpg" alt="Bryan Contey">
+        <div class="hero-photo">
+            <img src="headshot.jpg" alt="Bryan Contey">
+        </div>
         <div class="hero-info">
             <h1>I help businesses <em>implement AI</em> that actually works.</h1>
-            <p>Production AI systems — not demos. LLM integrations, data pipelines, and intelligent automation. 10+ years across Fidelity, Vanguard, and Geode Capital.</p>
+            <p class="hero-sub">Production AI systems — LLM integrations, data pipelines, and intelligent automation. From strategy to deployment, I build what your team needs to move faster.</p>
             <div class="hero-row">
-                <span class="badge"><span class="dot"></span> Available now</span>
+                <span class="badge"><span class="dot"></span> Available for contracts</span>
                 <a href="mailto:bryan.contey23@gmail.com" class="btn btn-p">Get in touch</a>
                 <a href="https://www.linkedin.com/in/bryan-c-14731a82/" target="_blank" class="btn btn-s">LinkedIn</a>
             </div>
@@ -166,26 +197,38 @@
     </div>
 
     <div class="div"></div>
-    <div class="logos">
-        <span class="lbl">Experience</span>
-        <span>Fidelity</span><span>Vanguard</span><span>Geode Capital</span><span>Invesco</span><span>S&amp;P Global</span>
-    </div>
-    <div class="div"></div>
 
-    <div class="stats">
-        <div class="stat"><div class="n">$1T<em>+</em></div><div class="l">Assets supported</div></div>
-        <div class="stat"><div class="n">141<em>+</em></div><div class="l">Production metrics</div></div>
-        <div class="stat"><div class="n">20<em>%</em></div><div class="l">Workflow reduction</div></div>
-        <div class="stat"><div class="n">3<em>x</em></div><div class="l">Promoted at Fidelity</div></div>
+    <!-- VALUE PROPS — what clients care about -->
+    <div class="value-bar">
+        <div class="value-item">
+            <span class="v-icon">&#x26A1;</span>
+            <div class="v-title">Prototype to Production</div>
+            <div class="v-desc">Working software, not slide decks</div>
+        </div>
+        <div class="value-item">
+            <span class="v-icon">&#x1F4CA;</span>
+            <div class="v-title">Measurable ROI</div>
+            <div class="v-desc">Every project tied to business outcomes</div>
+        </div>
+        <div class="value-item">
+            <span class="v-icon">&#x1F512;</span>
+            <div class="v-title">Enterprise-Grade</div>
+            <div class="v-desc">Built for scale, security, and reliability</div>
+        </div>
+        <div class="value-item">
+            <span class="v-icon">&#x1F91D;</span>
+            <div class="v-title">Your Team Owns It</div>
+            <div class="v-desc">Full handoff with docs and training</div>
+        </div>
     </div>
+
+    <div class="div"></div>
 
     <!-- ============ SERVICES ============ -->
     <div class="sec" id="services">
-        <div class="sec-head">
-            <div class="sec-label">Services</div>
-            <h2>What I build for your business</h2>
-            <p>Click any service to see details, deliverables, and typical outcomes.</p>
-        </div>
+        <div class="sec-label">Services</div>
+        <h2>What I build for your business</h2>
+        <p class="sec-sub">Click any service to see deliverables and typical results.</p>
 
         <div class="svc open">
             <div class="svc-top" onclick="toggle(this)">
@@ -193,7 +236,7 @@
                 <span class="svc-toggle">&#x25BC;</span>
             </div>
             <div class="svc-body"><div class="svc-inner">
-                <div class="svc-desc">Connect your business data to large language models. Your team searches, summarizes, and reasons over your own documents and databases — with proper retrieval, validation, and error handling built in.</div>
+                <div class="svc-desc">Connect your business data to large language models. Your team searches, summarizes, and reasons over your own documents and databases — with proper retrieval, validation, and error handling.</div>
                 <div class="svc-grid">
                     <span class="svc-item">Custom RAG pipelines over your documents</span>
                     <span class="svc-item">Claude, GPT, and open-source integration</span>
@@ -212,16 +255,16 @@
                 <span class="svc-toggle">&#x25BC;</span>
             </div>
             <div class="svc-body"><div class="svc-inner">
-                <div class="svc-desc">Automated pipelines that ingest, clean, validate, and serve your data. Your models and dashboards always have something reliable to work with — no more manual spreadsheet wrangling.</div>
+                <div class="svc-desc">Automated pipelines that ingest, clean, validate, and serve your data — so your models and dashboards always have something reliable to work with.</div>
                 <div class="svc-grid">
                     <span class="svc-item">Automated ETL from APIs, databases, files</span>
                     <span class="svc-item">Data validation and quality checks</span>
                     <span class="svc-item">Schema design and database architecture</span>
-                    <span class="svc-item">SEC EDGAR, market data, financial feeds</span>
+                    <span class="svc-item">Financial data feeds and market data</span>
                     <span class="svc-item">Scheduling and monitoring</span>
                     <span class="svc-item">Migration from manual workflows</span>
                 </div>
-                <div class="svc-result"><strong>Typical outcome:</strong> Hours of weekly manual data work reduced to zero. Clean, validated data flowing automatically into reporting and AI systems.</div>
+                <div class="svc-result"><strong>Typical outcome:</strong> Hours of weekly manual data work reduced to zero. Clean data flowing automatically into reporting and AI systems.</div>
             </div></div>
         </div>
 
@@ -231,7 +274,7 @@
                 <span class="svc-toggle">&#x25BC;</span>
             </div>
             <div class="svc-body"><div class="svc-inner">
-                <div class="svc-desc">I find the repetitive, error-prone processes in your business and replace them with intelligent automation. Systems that handle exceptions, adapt to edge cases, and scale with your team.</div>
+                <div class="svc-desc">I find the repetitive, error-prone processes in your business and replace them with intelligent automation — systems that handle exceptions, adapt to edge cases, and scale.</div>
                 <div class="svc-grid">
                     <span class="svc-item">Document processing and extraction</span>
                     <span class="svc-item">Automated reporting and alerts</span>
@@ -240,7 +283,7 @@
                     <span class="svc-item">System-to-system integration</span>
                     <span class="svc-item">Email and communication automation</span>
                 </div>
-                <div class="svc-result"><strong>Typical outcome:</strong> 20%+ reduction in manual work. At Vanguard, I automated global trading operations that previously required constant manual intervention.</div>
+                <div class="svc-result"><strong>Typical outcome:</strong> 20%+ reduction in manual work. Previously built automation for global trading operations handling trillions in assets.</div>
             </div></div>
         </div>
 
@@ -250,7 +293,7 @@
                 <span class="svc-toggle">&#x25BC;</span>
             </div>
             <div class="svc-body"><div class="svc-inner">
-                <div class="svc-desc">Dashboards that actually get used — because they answer the questions your leadership is asking. Clear narrative, decision-ready visuals, real-time data.</div>
+                <div class="svc-desc">Dashboards that get used — because they answer the questions leadership is actually asking. Clear narrative, decision-ready visuals, real-time data.</div>
                 <div class="svc-grid">
                     <span class="svc-item">Power BI and Tableau implementations</span>
                     <span class="svc-item">Custom web-based dashboards</span>
@@ -259,7 +302,7 @@
                     <span class="svc-item">Risk, performance, and ops views</span>
                     <span class="svc-item">Mobile-friendly executive summaries</span>
                 </div>
-                <div class="svc-result"><strong>Typical outcome:</strong> Leadership gets answers without asking analysts to pull data. At Geode Capital, I built 141+ metric daily reporting supporting $1T in AUM.</div>
+                <div class="svc-result"><strong>Typical outcome:</strong> Leadership gets answers without waiting for analysts. Previously built 141+ metric daily reporting supporting $1T in AUM.</div>
             </div></div>
         </div>
 
@@ -269,14 +312,14 @@
                 <span class="svc-toggle">&#x25BC;</span>
             </div>
             <div class="svc-body"><div class="svc-inner">
-                <div class="svc-desc">Not sure where to start? I assess your operations, identify the highest-impact AI opportunities, and build a practical plan with timelines, costs, and expected ROI. Honest answers about what will work.</div>
+                <div class="svc-desc">Not sure where to start? I assess your operations, identify the highest-impact AI opportunities, and build a practical plan with timelines, costs, and expected ROI.</div>
                 <div class="svc-grid">
                     <span class="svc-item">Current-state assessment</span>
-                    <span class="svc-item">Opportunity identification &amp; prioritization</span>
+                    <span class="svc-item">Opportunity identification &amp; ranking</span>
                     <span class="svc-item">Build vs. buy recommendations</span>
-                    <span class="svc-item">Implementation roadmap with milestones</span>
+                    <span class="svc-item">Implementation roadmap</span>
                     <span class="svc-item">Cost-benefit analysis</span>
-                    <span class="svc-item">Team capability assessment</span>
+                    <span class="svc-item">Team and tooling assessment</span>
                 </div>
                 <div class="svc-result"><strong>Typical outcome:</strong> A clear, prioritized plan starting with quick wins that build momentum and prove ROI before larger investments.</div>
             </div></div>
@@ -285,105 +328,110 @@
 
     <!-- ============ PROCESS ============ -->
     <div class="sec" id="process">
-        <div class="sec-head">
-            <div class="sec-label">Process</div>
-            <h2>How every engagement works</h2>
-            <p>Clear scope, fast delivery, no surprises.</p>
-        </div>
+        <div class="sec-label">Process</div>
+        <h2>How every engagement works</h2>
+        <p class="sec-sub">Clear scope, fast delivery, no surprises.</p>
 
         <div class="proc">
-            <div class="proc-step">
-                <div class="proc-num">01</div>
-                <h4>Discovery</h4>
-                <p>Free 30-min call. I learn your business, pain points, and goals. You get an honest assessment — no pitch.</p>
-                <span class="proc-arrow">→</span>
-            </div>
-            <div class="proc-step">
-                <div class="proc-num">02</div>
-                <h4>Scope &amp; Proposal</h4>
-                <p>Clear deliverables, timeline, and cost. Nothing starts until you approve. No hidden fees or scope creep.</p>
-                <span class="proc-arrow">→</span>
-            </div>
-            <div class="proc-step">
-                <div class="proc-num">03</div>
-                <h4>Build &amp; Demo</h4>
-                <p>Weekly demos of working software. You give feedback, I iterate. You see progress every single week.</p>
-                <span class="proc-arrow">→</span>
-            </div>
-            <div class="proc-step">
-                <div class="proc-num">04</div>
-                <h4>Ship &amp; Support</h4>
-                <p>Production deployment with docs and training. Your team owns it. Ongoing support available.</p>
+            <div class="proc-line"></div>
+            <div class="proc-grid">
+                <div class="proc-step">
+                    <div class="proc-dot"></div>
+                    <div class="proc-num">Step 01</div>
+                    <h4>Discovery</h4>
+                    <p>Free 30-min call. I learn your business, your challenges, and where AI fits. You get an honest assessment — no pitch, no obligation.</p>
+                </div>
+                <div class="proc-step">
+                    <div class="proc-dot"></div>
+                    <div class="proc-num">Step 02</div>
+                    <h4>Scope &amp; Proposal</h4>
+                    <p>Clear deliverables, timeline, and cost. Nothing starts until you approve. No hidden fees, no scope creep, no surprises.</p>
+                </div>
+                <div class="proc-step">
+                    <div class="proc-dot"></div>
+                    <div class="proc-num">Step 03</div>
+                    <h4>Build &amp; Demo</h4>
+                    <p>Weekly demos of working software. You see progress and give feedback every week — not a slide deck in 3 months.</p>
+                </div>
+                <div class="proc-step">
+                    <div class="proc-dot"></div>
+                    <div class="proc-num">Step 04</div>
+                    <h4>Ship &amp; Support</h4>
+                    <p>Production deployment with documentation and training. Your team owns it completely. Ongoing support available if needed.</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- ============ WHO I WORK WITH ============ -->
+    <!-- ============ WHO I HELP ============ -->
     <div class="sec">
-        <div class="sec-head">
-            <div class="sec-label">Clients</div>
-            <h2>Who I work with</h2>
-        </div>
-        <div class="who">
-            <div class="who-item">
+        <div class="sec-label">Clients</div>
+        <h2>Who I work with</h2>
+        <p class="sec-sub">Companies ready to move from AI experiments to production systems.</p>
+        <div class="who-grid">
+            <div class="who-card">
                 <h4>Startups &amp; Growth</h4>
                 <p>Need AI in your product but not the team yet. I build v1, help you hire, and hand off cleanly.</p>
             </div>
-            <div class="who-item">
+            <div class="who-card">
                 <h4>Financial Services</h4>
-                <p>Deep domain expertise — asset management, trading, advisory. I know the data, compliance, and workflows.</p>
+                <p>10+ years in asset management, trading, and advisory. I know the data, compliance, and workflows.</p>
             </div>
-            <div class="who-item">
+            <div class="who-card">
                 <h4>Mid-Market &amp; Enterprise</h4>
-                <p>You have data and processes but not an AI strategy. I find opportunities, build systems, train your team.</p>
+                <p>You have data and processes but no AI strategy. I find the opportunities, build systems, train your team.</p>
             </div>
         </div>
     </div>
 
+    <div class="div"></div>
+
     <!-- ============ WORK ============ -->
     <div class="sec" id="work">
-        <div class="sec-head">
-            <div class="sec-label">Selected Work</div>
-            <h2>Production systems, real results</h2>
-        </div>
+        <div class="sec-label">Selected Work</div>
+        <h2>Production systems, real results</h2>
+        <p class="sec-sub">Real systems built for real users.</p>
         <div class="proj">
             <div class="proj-card">
                 <div class="proj-type">AI + Data Engineering</div>
                 <h3>Morningstar Replacement Platform</h3>
-                <p>Full-stack platform replacing $50K+/yr Morningstar subscriptions. Automated SEC EDGAR ingestion with AI validation, interactive fund dashboards.</p>
-                <div class="tags"><span class="tg">Python</span><span class="tg">Flask</span><span class="tg">SEC EDGAR</span><span class="tg">SQLite</span><span class="tg">Chart.js</span></div>
+                <p>Replaced $50K+/yr Morningstar subscription with automated SEC EDGAR ingestion, AI validation, and interactive fund dashboards.</p>
+                <div class="tags"><span class="tg">Python</span><span class="tg">Flask</span><span class="tg">SEC EDGAR</span><span class="tg">SQLite</span></div>
             </div>
             <div class="proj-card">
-                <div class="proj-type">Quantitative Analytics</div>
-                <h3>AlphaPulse — AI Market Analytics</h3>
+                <div class="proj-type">AI Analytics</div>
+                <h3>AlphaPulse Market Intelligence</h3>
                 <p>Real-time options flow analysis, gamma exposure mapping, and automated signal detection for institutional decision support.</p>
                 <div class="tags"><span class="tg">Python</span><span class="tg">Pandas</span><span class="tg">Matplotlib</span><span class="tg">APIs</span></div>
             </div>
             <div class="proj-card">
-                <div class="proj-type">Geode Capital</div>
-                <h3>$1T AUM Risk &amp; Performance</h3>
-                <p>141+ metric daily reporting system. Surfaced performance drivers, exposures, and positioning for PMs and traders.</p>
+                <div class="proj-type">Enterprise Analytics</div>
+                <h3>$1T AUM Performance System</h3>
+                <p>141+ metric daily risk/performance reporting. Surfaced performance drivers and positioning for PMs and traders.</p>
                 <div class="tags"><span class="tg">Python</span><span class="tg">SQL</span><span class="tg">Power BI</span><span class="tg">Tableau</span></div>
             </div>
             <div class="proj-card">
-                <div class="proj-type">Vanguard</div>
-                <h3>Trading Ops Automation</h3>
-                <p>Automated equity index trading operations. Manual exception handling replaced with intelligent workflows across global ops.</p>
+                <div class="proj-type">Automation</div>
+                <h3>Global Trading Ops Automation</h3>
+                <p>Replaced manual exception handling with intelligent workflows across equity index trading operations.</p>
                 <div class="tags"><span class="tg">Python</span><span class="tg">Automation</span><span class="tg">Trading</span></div>
             </div>
         </div>
     </div>
 
+    <div class="div"></div>
+
     <!-- ============ ABOUT ============ -->
     <div class="sec" id="about">
-        <div class="sec-head">
-            <div class="sec-label">About</div>
-            <h2>Background &amp; stack</h2>
-        </div>
-        <div class="about">
+        <div class="sec-label">About</div>
+        <h2>Background</h2>
+        <div class="about" style="margin-top:28px;">
             <div>
                 <h3>Experience</h3>
-                <p>10+ years at the intersection of finance and technology. Promoted three times at Fidelity into the FIAM rotational program. Built quantitative analytics at Geode Capital supporting $1T in AUM. Automated trading operations at Vanguard. Now I help businesses implement AI that delivers measurable results — across industries, not just finance.</p>
+                <p>10+ years building production systems at the intersection of technology and finance. Built quantitative analytics supporting $1T in AUM at Geode Capital. Automated global trading operations at Vanguard. Now I help businesses across industries implement AI that delivers measurable results.</p>
+                <div class="logos">
+                    <span>Fidelity</span><span>Vanguard</span><span>Geode Capital</span><span>Invesco</span><span>S&amp;P Global</span>
+                </div>
             </div>
             <div>
                 <h3>Stack</h3>
@@ -399,25 +447,27 @@
     <!-- ============ CTA ============ -->
     <div class="cta">
         <h2>Let's work together</h2>
-        <p>Start with a free 30-minute discovery call. Honest assessment of where AI can help your business — no pitch, no obligation.</p>
+        <p>Start with a free 30-minute discovery call. Honest assessment of where AI can help — no pitch, no obligation.</p>
         <div class="cta-btns">
             <a href="mailto:bryan.contey23@gmail.com" class="btn btn-p">Get in touch</a>
             <a href="https://www.linkedin.com/in/bryan-c-14731a82/" target="_blank" class="btn btn-s">LinkedIn</a>
         </div>
-        <div class="cta-sub">bryan.contey23@gmail.com &middot; 708-653-8724 &middot; Chicago, IL</div>
+        <div class="cta-sub">
+            <a href="mailto:bryan.contey23@gmail.com">bryan.contey23@gmail.com</a> &middot; 708-653-8724 &middot; Chicago, IL
+        </div>
     </div>
 
 </div>
 
 <footer><div class="wrap">&copy; 2026 Bryan Contey</div></footer>
 
+</div>
+
 <script>
 function toggle(el){
     const svc=el.parentElement;
     const wasOpen=svc.classList.contains('open');
-    // Close all
     document.querySelectorAll('.svc').forEach(s=>s.classList.remove('open'));
-    // Open clicked if it wasn't open
     if(!wasOpen)svc.classList.add('open');
 }
 </script>
